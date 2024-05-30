@@ -1,15 +1,23 @@
 import './App.css';
 
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import MainPage from './components/MainPage';
+import MemberPage from './components/MemberPage';
+
 function App() {
+    const navigate = useNavigate();
+
+
     return (
         <div className="App">
-            <div className='container'>
-                <div className='row'>
-                    <div className='col'>
-                        메인페이지~!!
-                    </div>
-                </div>
-            </div>
+            <Routes>
+                <Route path='/' element={<MainPage/>} />
+                <Route path='/detail' element={<MemberPage/>} />
+
+            </Routes>
+
+
+           
         </div>
     );
 }
