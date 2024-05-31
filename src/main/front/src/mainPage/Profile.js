@@ -11,6 +11,7 @@ const Profille = () => {
     const [memberList , setMemberList] = useState(memberVo);
 
     const check = (e) =>{
+        console.log(e.target.value)
         setMemberList({...memberList , [e.target.name] : e.target.value})
     }
 
@@ -20,7 +21,7 @@ const Profille = () => {
             return;
         }
         if(memberList.memberPw == ''){
-            alert("아이디를 입력해주세요")
+            alert("비밀번호를 입력해주세요")
             return;
         }
         

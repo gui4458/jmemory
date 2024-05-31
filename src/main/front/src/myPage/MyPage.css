@@ -1,0 +1,132 @@
+.myPage-Main{
+   padding: 30px;
+   display: flex;
+}
+.myPage-Border1{
+    width: 20%;
+    border: 2px solid #6c6b6b;
+    background-color: #fff;
+    height: 650px;
+    border-radius: 5px 10px 10px 5px;
+    border-right: none;
+    display: flex;
+    padding-top: 25px;
+    padding-left: 20px;
+}
+.myPage-Border2{
+    width: 60%;
+    border: 2px solid #6c6b6b;
+    background-color: #fff;
+    height: 650px;
+    border-radius: 10px 5px 5px 10px;
+    border-left: none;
+    padding-top: 25px;
+}
+.myPage-Border3{
+    width: 100%;
+    height: 95%;
+    border: 3px dashed #6c6b6b;
+    background-color: #fff;
+    border-radius: 5px 10px 10px 5px;
+    border-right: none;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+.myPage-Border4{
+    width: 97%;
+    height: 95%;
+    border: 3px dashed #6c6b6b;
+    background-color: #fff;
+    border-radius: 10px 5px 5px 10px;
+    border-left: none;
+    padding-top: 10px;
+}
+.myPage-Border5{
+    padding: 10px;
+    width: 100%;
+    height: 98%;
+    border: none;
+    background-color: #ccc;
+    border-radius: 5px 10px 10px 5px;
+    border-right: none;
+}
+.myPage-Border6{
+    width: 99%;
+    height: 98%;
+    border: none;
+    background-color: #ccc;
+    border-radius: 10px 5px 5px 10px;
+    border-left: none;
+    padding-left: 10px;
+}
+
+.pro-header{
+    margin-top: 20px;
+    display: flex;
+   justify-content: center;
+}
+.pro-header h5{
+    font-size: 13px;
+    margin-left: 5px;
+}
+.pro-content{
+    width: 100%;
+    height: 92%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 25px;
+}
+.todayIs{
+    height: 5%;
+    border: 2px solid #ccc;
+    text-align: center;
+}
+.todayIs h5{
+    font-size: 14px;
+}
+.photo{
+    margin-top: 5px;
+    border: 2px solid #ccc;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.stu-mes{
+    margin-top: 20px;
+    height: 30%;
+    text-align: center;
+    padding: 10px;
+}
+.stu-mes h5 {
+    color: #21c3d2;
+}
+.pro-footer{
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    height: 30%;
+    padding-top: 70px;
+}
+.pro-footer h5 {
+    font-size: 12px;
+}
+
+.pro-header2{
+    height: 9.5%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+.pro-header2 h5{
+    margin-top: 20px;
+    font-size: 20px;
+    margin-left: 5px;
+    color: blueviolet;
+}
+.pro-content2{
+    width: 98%;
+    height: 89%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 25px;
+}

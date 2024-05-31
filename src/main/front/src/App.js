@@ -10,6 +10,7 @@ import Notice from './mainPage/Notice';
 import Profille from './mainPage/Profile';
 import Footer from './mainPage/Footer';
 import MainHomePage from './mainPage/MainHomePage';
+import MyPage from './myPage/MyPage';
 
 function App() {
     const navigate = useNavigate();
@@ -17,12 +18,11 @@ function App() {
 
     return (
         <div className="App">
-            <Header />
             <Routes>
                 <Route path='/' element={<MainHomePage />} />
                 <Route path='/detail' element={<MemberPage/>} />
                 <Route path='/goJoin' element={<MemberJoinPage navigate={navigate}/>} />
-
+                <Route path='/myHomePage' element={<MyPage/>}/>
             </Routes>
         </div>
     );
