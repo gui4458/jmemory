@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="memberMapper">
+    <resultMap id="member" type="com.green.jmemory.member.vo.MemberVO">
+        <id column="MEMBER_CODE" property="memberCode"/>
+        <result column="MEMBER_ID" property="memberId"/>
+        <result column="MEMBER_PW" property="memberPw"/>
+        <result column="MEMBER_NAME" property="memberName"/>
+        <result column="MEMBER_NICKNAME" property="memberNickname"/>
+        <result column="MEMBER_GENDER" property="memberGender"/>
+        <result column="MEMBER_EMAIL" property="memberEmail"/>
+        <result column="MEMBER_TEL" property="memberTel"/>
+        <result column="MEMBER_ROLL" property="memberRoll"/>
+        <result column="MEMBER_ADDR" property="memberAddr"/>
+        <result column="POST_CODE" property="postCode"/>
+        <result column="ADDR_DETAIL" property="addrDetail"/>
+        <result column="JOIN_DATE" property="joinDate"/>
+    </resultMap>
+    <!--  아이디 중복 체크  -->
+    <select id="idOverlappingChk" resultType="int">
+        SELECT COUNT(MEMBER_ID) COUNT
+        FROM JMEMORY_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <!--  닉네임 중복 체크  -->
+    <select id="nicknameOverlappingChk" resultType="int">
+        SELECT COUNT(MEMBER_NICKNAME) COUNT
+        FROM JMEMORY_MEMBER
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+
+    <!--회원가입-->
+    <insert id="joinMember">
+        INSERT INTO JMEMORY_MEMBER(
+            MEMBER_ID
+            ,MEMBER_PW
+            ,MEMBER_NAME
+            ,MEMBER_NICKNAME
+            ,MEMBER_GENDER
+            ,MEMBER_EMAIL
+            ,MEMBER_TEL
+            ,MEMBER_ADDR
+            ,POST_CODE
+            ,ADDR_DETAIL
+        )VALUES(
+            #{memberId}
+            ,#{memberPw}
+            ,#{memberName}
+            ,#{memberNickname}
+            ,#{memberGender}
+            ,#{memberEmail}
+            ,#{memberTel}
+            ,#{memberAddr}
+            ,#{postCode}
+            ,#{addrDetail}
+        )
+    </insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
