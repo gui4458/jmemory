@@ -12,6 +12,9 @@ const MainPage = () => {
                         <button className='btn btn-primary' onClick={() =>
                             navigate('/detail')
                         }>상세로</button>
+                        <button className='btn btn-primary' onClick={() =>
+                            navigate('/goJoin')
+                        }>회원가입</button>
                     </div>
                 </div>
             </div>
