@@ -7,4 +7,17 @@
 
 *{
     font-family: 'MangoDdobak-B';
+    list-style: none;
+}
+
+.contents{
+    padding: 10px;
+    height: auto;
+    display: flex;
+    margin-top: 20px;
+}
+
+.footers{
+    height: auto;
+    padding: 10px;
 }

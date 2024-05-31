@@ -1,4 +1,4 @@
-import './Header.css';
+import './MainPage.css';
 const Header = () => {
     return(
         <div className="HeaderContainer">

@@ -1,0 +1,76 @@
+/* header CSS */
+
+.HeaderContainer{
+    padding: 10px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid rgb(76, 90, 122);
+}
+
+.HeaderContainer h2{
+    color: rgb(76, 90, 122);
+    font-size: 40px;
+}
+
+/* Notice CSS */
+.notice {
+    width: 70%;
+    border: 1px solid #000;
+    text-align: center;
+    height: 300px;
+    margin-right: 20px;
+}
+
+/* Profille CSS */
+.profille{
+    width: 30%;
+    height: 300px;
+    border: 1px solid #000;
+    padding: 20px;
+}
+.login{
+    padding: 10px;
+    height: auto;
+}
+.login input {
+    width: 98%;
+    margin-top: 5px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid  rgb(76, 90, 122);
+} 
+.login button {
+    width: 98%;
+    height: 40px;
+    margin-top: 10px;
+    border: none;
+    background-color: rgb(76, 90, 122);
+    border-radius: 10px;
+    color: #fff;
+}
+.login button:hover {
+    background-color: rgb(4, 22, 66);
+}
+.member-find{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.member-find li{
+    margin-left: 5px;
+    font-size: 12px;
+}
+.member-find a:hover{
+    cursor: pointer;
+}
+/* Footer CSS */
+.footer{
+    text-align: center;
+    height: 250px;
+    margin-top: 20px;
+    border: 1px solid #000;
+}

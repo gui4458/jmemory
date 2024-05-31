@@ -6,6 +6,10 @@ import MemberPage from './components/MemberPage';
 import MemberJoinPage from './components/MemberJoinPage';
 
 import Header from './mainPage/Header';
+import Notice from './mainPage/Notice';
+import Profille from './mainPage/Profile';
+import Footer from './mainPage/Footer';
+import MainHomePage from './mainPage/MainHomePage';
 
 function App() {
     const navigate = useNavigate();
@@ -15,14 +19,11 @@ function App() {
         <div className="App">
             <Header />
             <Routes>
-                <Route path='/' element={<MainPage/>} />
+                <Route path='/' element={<MainHomePage />} />
                 <Route path='/detail' element={<MemberPage/>} />
                 <Route path='/goJoin' element={<MemberJoinPage navigate={navigate}/>} />
 
             </Routes>
-
-
-           
         </div>
     );
 }
