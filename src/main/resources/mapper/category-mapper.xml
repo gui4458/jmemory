@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 해당 파일에 모든 쿼리문을 작성 -->
-<mapper namespace="cate-mapper">
+<mapper namespace="cateMapper">
 	<resultMap id="cate" type="com.green.jmemory.cate.VO.CateVO">
-        <id column="CATE_CODE" property="cateCode"/>
-        <result column="CATE_NAME" property="cateName"/>
-        <result column="CATE_SECRET" property="cateSecret"/>
+        <id column="CATE_CODE"          property="cateCode"/>
+        <result column="CATE_NAME"      property="cateName"/>
+        <result column="CATE_SECRET"    property="cateSecret"/>
     </resultMap>
 
     <select id="cateGorySelect" resultMap="cate">
