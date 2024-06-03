@@ -14,7 +14,7 @@ public class CateServiceImpl implements CateService{
     private SqlSessionTemplate sqlSession;
 
     @Override
-    public List<CateVO> cateGorySelect() {
+    public List<CateVO> cateGorySelect(){
         return sqlSession.selectList("cateMapper.cateGorySelect");
     }
 }
