@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const MemberJoinPage = ({ navigate }) => {
-    
-
     const [isIdValid, setIsIdValid] = useState(false);
     const [isNicknameValid, setIsNicknameValid] = useState(false);
     const [member, setMember] = useState({
@@ -25,7 +23,7 @@ const MemberJoinPage = ({ navigate }) => {
     const [telMiddle, setTelMiddle] = useState("");
     const [telLast, setTelLast] = useState("");
     const [kakaoMapLoaded, setKakaoMapLoaded] = useState(false);
-    const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인을 위한 상태 추가
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
@@ -58,7 +56,6 @@ const MemberJoinPage = ({ navigate }) => {
     const validateMemberPw = (value) => {
         if (value !== '') {
             if (!/(?=.*[a-zA-Z])(?=.*\d).{6,}/.test(value)) {
-                console.log(1)
                 return "비밀번호는 영문자, 숫자를 포함하여 6자 이상이어야 합니다.";
             }
         }
@@ -67,11 +64,11 @@ const MemberJoinPage = ({ navigate }) => {
 
     const validateMemberNickname = (value) => {
         if (value !== '') {
-            if (value.includes(badWords)) {
+            if (badWords.some(word => value.includes(word))) {
                 return "부적절한 단어가 포함되어 있습니다.";
             }
             if (/^([ㄱ-ㅎㅏ-ㅣ])+$/.test(value)) {
-                return "사용 할 수 없는 닉네임 입니다."
+                return "사용 할 수 없는 닉네임 입니다.";
             }
         }
         return "";
@@ -83,7 +80,7 @@ const MemberJoinPage = ({ navigate }) => {
                 return "한글로 입력해주세요.";
             }
             if (!/^[가-힣]+$/.test(value)) {
-                return "이름을 확인 해주세요."
+                return "이름을 확인 해주세요.";
             }
         }
         return "";
@@ -100,7 +97,7 @@ const MemberJoinPage = ({ navigate }) => {
 
     const validateMemberTel = (value) => {
         if (value !== '') {
-            if (!/^01[016789]{1}-?[0-9]{3,4}-?[0-9]{4}$/.test(value)) {
+            if (!/^01[016789]{1}-?[0-9]{3,4}-?[0-9]{5}$/.test(value)) {
                 return "올바른 전화번호를 입력해주세요.";
             }
         }
@@ -123,7 +120,7 @@ const MemberJoinPage = ({ navigate }) => {
         errors.memberNickname = validateMemberNickname(member.memberNickname);
         errors.memberEmail = validateMemberEmail(member.memberEmail);
         errors.memberTel = validateMemberTel(member.memberTel);
-        errors.confirmPassword = validateConfirmPassword(confirmPassword); // 비밀번호 확인 유효성 검사 추가
+        errors.confirmPassword = validateConfirmPassword(confirmPassword);
         setErrors(errors);
         return Object.values(errors).every(error => !error);
     };
@@ -133,40 +130,16 @@ const MemberJoinPage = ({ navigate }) => {
         setErrors({ ...errors, memberId: validateMemberId(e.target.value) });
     };
 
-    // 비밀번호 확인 값이 변경될 때마다 실행되는 함수
     const handleConfirmPasswordChange = (e) => {
         const value = e.target.value;
         setConfirmPassword(value);
-
-        // 입력된 비밀번호의 길이 이상인 경우에만 비밀번호 확인이 비교됨
-        if (value.length >= member.memberPw.length) {
-            // 비밀번호와 비밀번호 확인이 다르면 에러 설정
-            if (member.memberPw !== value) {
-                setErrors({ ...errors, confirmPassword: "비밀번호가 일치하지 않습니다." });
-            } else {
-                // 비밀번호가 일치하면 에러 초기화
-                setErrors({ ...errors, confirmPassword: "" });
-            }
-        } else {
-            setErrors({ ...errors, confirmPassword: "" });
-        }
+        setErrors({ ...errors, confirmPassword: validateConfirmPassword(value) });
     };
 
-    // 비밀번호가 변경될 때마다 실행되는 함수
     const handleMemberPwChange = (e) => {
-        let value = e.target.value;
+        const value = e.target.value;
         setMember({ ...member, memberPw: value });
-        console.log('Value:', value); // 확인용
-        const pwError = validateMemberPw(value);
-        console.log('PW Error:', pwError); // 확인용
-        setErrors({ ...errors, memberPw: pwError }); // 비밀번호 유효성 검사 추가
-    
-        // 비밀번호가 변경될 때마다 비밀번호 확인 값도 확인
-        if (confirmPassword !== "" && value !== confirmPassword) {
-            setErrors({ ...errors, confirmPassword: "비밀번호가 일치하지 않습니다." });
-        } else {
-            setErrors({ ...errors, confirmPassword: "" });
-        }
+        setErrors({ ...errors, memberPw: validateMemberPw(value), confirmPassword: validateConfirmPassword(confirmPassword) });
     };
 
     const handleMemberNicknameChange = (e) => {
@@ -186,7 +159,7 @@ const MemberJoinPage = ({ navigate }) => {
             ...member,
             memberEmail: emailLocalPart + (domain !== "선택" ? `@${domain}` : "")
         });
-        setErrors({ ...errors, memberEmail: validateMemberEmail(member.memberEmail) });
+        setErrors({ ...errors, memberEmail: validateMemberEmail(emailLocalPart + (domain !== "선택" ? `@${domain}` : "")) });
     };
 
     const handleDomainChange = (e) => {
@@ -205,7 +178,7 @@ const MemberJoinPage = ({ navigate }) => {
                 memberEmail: member.memberEmail.split("@")[0]
             });
         }
-        setErrors({ ...errors, memberEmail: validateMemberEmail(member.memberEmail) });
+        setErrors({ ...errors, memberEmail: validateMemberEmail(member.memberEmail.split("@")[0] + (selectedDomain !== "선택" ? `@${selectedDomain}` : "")) });
     };
 
     const handleCustomEmailDomainChange = (e) => {
@@ -215,7 +188,7 @@ const MemberJoinPage = ({ navigate }) => {
             ...member,
             memberEmail: member.memberEmail.split("@")[0] + "@" + customDomain
         });
-        setErrors({ ...errors, memberEmail: validateMemberEmail(member.memberEmail) });
+        setErrors({ ...errors, memberEmail: validateMemberEmail(member.memberEmail.split("@")[0] + "@" + customDomain) });
     };
 
     const handleTelChange = (e, part) => {
@@ -231,7 +204,13 @@ const MemberJoinPage = ({ navigate }) => {
                 (part === "middle" ? value : telMiddle) +
                 (part === "last" ? value : telLast)
         });
-        setErrors({ ...errors, memberTel: validateMemberTel(member.memberTel) });
+        setErrors({
+            ...errors, memberTel: validateMemberTel(
+                (part === "first" ? value : telFirst) +
+                (part === "middle" ? value : telMiddle) +
+                (part === "last" ? value : telLast)
+            )
+        });
     };
 
     const handleAddressSearch = () => {
@@ -239,15 +218,45 @@ const MemberJoinPage = ({ navigate }) => {
             new window.daum.Postcode({
                 oncomplete: function (data) {
                     const fullAddress = data.address;
+                    let extraAddress = "";
+
+                    if (data.addressType === "R") {
+                        if (data.bname !== "") {
+                            extraAddress += data.bname;
+                        }
+                        if (data.buildingName !== "") {
+                            extraAddress +=
+                                extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+                        }
+                        fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+                    }
+
                     setMember({
                         ...member,
-                        memberAddr: fullAddress,
-                        postCode: data.zonecode
+                        postCode: data.zonecode,
+                        memberAddr: fullAddress
                     });
                 }
             }).open();
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (validateForm()) {
+            try {
+                const response = await axios.post("/member/join", member);
+
+                if (response.status === 200) {
+                    alert("회원가입이 완료되었습니다!");
+                    navigate("/");
+                }
+            } catch (error) {
+                alert("회원가입 중 오류가 발생했습니다.");
+            }
         } else {
-            console.error("Kakao Map script is not loaded yet.");
+            console.log("Form validation failed:", errors);
         }
     };
 
@@ -264,6 +273,7 @@ const MemberJoinPage = ({ navigate }) => {
                         <div className="col-6">
                             아이디 :{" "}
                             <input
+                                maxLength={20}
                                 type="text"
                                 value={member.memberId}
                                 onChange={handleMemberIdChange}
@@ -299,6 +309,7 @@ const MemberJoinPage = ({ navigate }) => {
                         <div className="col-12">
                             비밀번호 :{" "}
                             <input
+                                maxLength={20}
                                 type="password"
                                 value={member.memberPw}
                                 onChange={handleMemberPwChange}
@@ -308,6 +319,7 @@ const MemberJoinPage = ({ navigate }) => {
                         <div className="col-12">
                             비밀번호 확인 :{" "}
                             <input
+                                maxLength={20}
                                 type="password"
                                 value={confirmPassword}
                                 onChange={handleConfirmPasswordChange}
@@ -317,6 +329,7 @@ const MemberJoinPage = ({ navigate }) => {
                         <div className="col-6">
                             이름 :{" "}
                             <input
+                                maxLength={10}
                                 type="text"
                                 value={member.memberName}
                                 onChange={handleMemberNameChange}
@@ -327,10 +340,43 @@ const MemberJoinPage = ({ navigate }) => {
                         <div className="col-6">
                             닉네임 :{" "}
                             <input
+                                maxLength={20}
                                 type="text"
                                 value={member.memberNickname}
                                 onChange={handleMemberNicknameChange}
+                                readOnly={isNicknameValid}
                             />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    if (isNicknameValid) {
+                                        setIsNicknameValid(false);
+                                    } else {
+                                        if (member.memberNickname !== '') {
+                                            if (badWords.some(word => member.memberNickname.includes(word))) {
+                                                return "부적절한 단어가 포함되어 있습니다.";
+                                            }
+                                            if (/^([ㄱ-ㅎㅏ-ㅣ])+$/.test(member.memberNickname)) {
+                                                return "사용 할 수 없는 닉네임 입니다.";
+                                            }
+                                            axios.post("/nicknameOverlappingChk", { memberNickname: member.memberNickname })
+                                                .then((response) => {
+                                                    if (response.data === 1) {
+                                                        alert("해당 닉네임은 이미 존재합니다.\n다시 입력해주세요.")
+                                                    } else {
+                                                        alert("사용가능한 닉네임 입니다.")
+                                                        setIsNicknameValid(true);
+                                                    }
+                                                })
+                                                .catch((error) => {
+                                                    console.error("에러 발생:", error);
+                                                })
+                                        }
+                                        }
+                                }}
+                            >
+                                {isNicknameValid ? "다시 입력" : "중복검사"}
+                            </button>
                             {errors.memberNickname && <div className="error">{errors.memberNickname}</div>}
                         </div>
                         <div className="col-6">
@@ -358,6 +404,7 @@ const MemberJoinPage = ({ navigate }) => {
                         <div className="col-6">
                             Email :{" "}
                             <input
+                                maxLength={20}
                                 type="text"
                                 value={member.memberEmail.split("@")[0]}
                                 placeholder="example"
@@ -391,12 +438,14 @@ const MemberJoinPage = ({ navigate }) => {
                             -
                             <input
                                 type="text"
+                                maxLength={4}
                                 value={telMiddle}
                                 onChange={(e) => handleTelChange(e, "middle")}
                             />
                             -
                             <input
                                 type="text"
+                                maxLength={4}
                                 value={telLast}
                                 onChange={(e) => handleTelChange(e, "last")}
                             />

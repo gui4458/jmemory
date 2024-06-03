@@ -25,10 +25,10 @@ public class MemberController {
         System.out.println(memberId.get("memberId"));
         return memberService.idOverlappingChk(memberId.get("memberId"));
     }
-    @GetMapping("/nicknameOverlappingChk")
-    public int nicknameOverlappingChk(@RequestBody Map<String,String> memberId){
-        System.out.println("아이디중복체크");
-        System.out.println(memberId.get("memberId"));
-        return memberService.idOverlappingChk(memberId.get("memberId"));
+    @PostMapping("/nicknameOverlappingChk")
+    public int nicknameOverlappingChk(@RequestBody Map<String,String> memberNickname){
+        System.out.println("닉네임중복체크");
+        System.out.println(memberNickname.get("memberNickname"));
+        return memberService.nicknameOverlappingChk(memberNickname.get("memberNickname"));
     }
 }

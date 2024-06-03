@@ -29,7 +29,7 @@
     <select id="nicknameOverlappingChk" resultType="int">
         SELECT COUNT(MEMBER_NICKNAME) COUNT
         FROM JMEMORY_MEMBER
-        WHERE MEMBER_ID = #{memberId}
+        WHERE MEMBER_NICKNAME = #{memberNickname}
     </select>
 
 
