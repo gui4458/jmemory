@@ -1,6 +1,20 @@
+import axios from 'axios';
 import './MyPage.css';
+import { useEffect, useState } from 'react';
 
 const MyPage = () =>{
+
+    const [categoryList , setCategoryList] = useState('')
+
+    useEffect(() => {
+        axios.get("/selectCate")
+        .then(response => {
+            console.log(response)
+        }).catch(error => {
+            console.log(error)
+        })
+    }, [])
+
     return(
         <div className="myPage-Main">
             <div className="myPage-Border1">
@@ -43,6 +57,15 @@ const MyPage = () =>{
                         </div>
                     </div>
                 </div> 
+            </div>
+
+            {/* 카테고리 생성 */}
+            <div className='category'>
+                <ul>
+                    <li><a className='category-menu'>안녕</a></li>
+                    <li><a className='category-menu'>방가워</a></li>
+                    <li><a className='category-menu'>할루할루</a></li>
+                </ul>
             </div>
         </div>
     )
