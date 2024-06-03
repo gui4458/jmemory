@@ -3,9 +3,7 @@ package com.green.jmemory.cate.controller;
 import com.green.jmemory.cate.VO.CateVO;
 import com.green.jmemory.cate.service.CateService;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

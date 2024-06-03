@@ -11,6 +11,7 @@ import MyPage from './myPage/MyPage';
 import MemberPage from './components/member/MemberPage';
 import MemberJoinPage from './components/member/MemberJoinPage';
 import BoradForm from './components/board/BoradForm';
+import Detail from './myPage/Detail';
 
 function App() {
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/goJoin' element={<MemberJoinPage navigate={navigate}/>} />
                 <Route path='/myHomePage' element={<MyPage/>}/>
                 <Route path='/boardForm' element={<BoradForm/>}/>
+                <Route path='/cateDetail/:cateCode' element={<Detail />}></Route>
             </Routes>
         </div>
     );

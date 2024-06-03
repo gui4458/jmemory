@@ -1,70 +1,46 @@
 import axios from 'axios';
 import './MyPage.css';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Detail from './Detail';
+import MyPageBoard1 from './MypageBoard1';
+import MyPageBoard2 from './MyPageBoard2';
 
 const MyPage = () =>{
 
-    const [categoryList , setCategoryList] = useState('')
+    const navigate = useNavigate();
+
+    const [categoryList , setCategoryList] = useState([])
 
     useEffect(() => {
         axios.get("/selectCate")
         .then(response => {
             console.log(response)
+            setCategoryList(response.data)
         }).catch(error => {
             console.log(error)
         })
     }, [])
+    
+    const goCate = () =>{
 
+    }
     return(
         <div className="myPage-Main">
-            <div className="myPage-Border1">
-                <div className='myPage-Border3'>
-                    <div className='myPage-Border5'>
-                        
-                        {/* 프로필시작 */}
-                        <div className='pro-header'>
-                            <h5>Today : 1234</h5>
-                            <h5>Total : 1231564</h5>
-                        </div>
-                        
-                        <div className='pro-content'>
-                            <div className='todayIs'>
-                                <h5>todat is : 좋음</h5>
-                            </div>
-                            <div className='photo'>
-                                <h3>사진</h3>
-                            </div>
-                            <div className='stu-mes'>
-                                <h5>ㄴr 는 오i롭ㄷr</h5>
-                            </div>
-                            <div className='pro-footer'>
-                                <h5>JMEMORY</h5>
-                                <h5>a1234@naver.com</h5>
-                            </div>
-                        </div>
-                    </div>     
-                </div>  
-            </div>
-            <div className="myPage-Border2">
-                <div className='myPage-Border4'>
-                    <div className='myPage-Border6'>
-                        <div className='pro-header2'>
-                            <h5>추억저장소</h5>
-                        </div>
-                            
-                        <div className='pro-content2'>
-                            
-                        </div>
-                    </div>
-                </div> 
-            </div>
-
+            <MyPageBoard1 />
+            <MyPageBoard2/>
             {/* 카테고리 생성 */}
             <div className='category'>
                 <ul>
-                    <li><a className='category-menu'>안녕</a></li>
-                    <li><a className='category-menu'>방가워</a></li>
-                    <li><a className='category-menu'>할루할루</a></li>
+                {
+                    categoryList.map((category, idx) => {
+                        return(
+                            <li key={category.cateCode}>
+                                <a className='category-menu' onClick={() => navigate(`/cateDetail/${category.cateCode}`)}>{category.cateName}</a>
+                            </li>
+                        )
+                    })
+                }
                 </ul>
             </div>
         </div>
