@@ -26,4 +26,10 @@ public class MemberServiceImpl implements MemberService{
     public int nicknameOverlappingChk(String memberNickname) {
         return sqlSession.selectOne("memberMapper.nicknameOverlappingChk",memberNickname);
     }
+
+    @Override
+    public MemberVO login(String memberId) {
+        return sqlSession.selectOne("memberMapper.login",memberId);
+    }
+
 }

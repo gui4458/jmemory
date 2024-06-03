@@ -11,4 +11,6 @@ public interface MemberService {
 
     //닉네임 중복 확인
     int nicknameOverlappingChk(String memberNickname);
+
+    MemberVO login(String memberId);
 }

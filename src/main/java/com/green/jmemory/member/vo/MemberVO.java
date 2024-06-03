@@ -11,6 +11,7 @@ public class MemberVO {
     private String memberGender;
     private String memberEmail;
     private String memberTel;
+    private String memberRoll;
     private String memberAddr;
     private String postCode;
     private String addrDetail;

@@ -21,9 +21,9 @@ const BoradForm = () => {
                             {dateString}
                         </div>
                         <div className="col">
-                            <select>
-                                <option selected>게시글</option>
-                                <option>사진</option>
+                            <select defaultValue={'사진'}>
+                                <option value={'게시글'}>게시글</option>
+                                <option value={'사진'}>사진</option>
                                 <option>동영상</option>
                                 <option>일기</option>
                             </select>
@@ -41,6 +41,17 @@ const BoradForm = () => {
                     <div className="row">
                         <div className="col-12">
                             <textarea cols={80} rows={15}></textarea>
+                        </div>
+                        
+                    </div>
+                    <div className="row">
+                        <div className="col-6">
+                            공개설정
+                        </div>
+                        <div className="col-6">
+                            <select>
+                                
+                            </select>
                         </div>
                         
                     </div>

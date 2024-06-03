@@ -4,47 +4,67 @@ import { useState } from 'react';
 import axios from 'axios';
 
 const Profille = () => {
-    const memberVo = {
-        memberId : '',
-        memberPw : ''
-    }
-    const [memberList , setMemberList] = useState(memberVo);
+    const [member, setMember] = useState({
+        memberId: '',
+        memberPw: ''
+    });
 
-    const check = (e) =>{
-        console.log(e.target.value)
-        setMemberList({...memberList , [e.target.name] : e.target.value})
-    }
+    const { memberId, memberPw } = member;
+    const navigate = useNavigate();
+
+    const loginOnChange = (e) => {
+        const { value, name } = e.target;
+        setMember({
+            ...member,
+            [name]: value
+        });
+    };
 
     const goLogin = () => {
-        if(memberList.memberId == ''){
-            alert("아이디를 입력해주세요")
+        if (memberId === '') {
+            alert("아이디를 입력해주세요");
             return;
         }
-        if(memberList.memberPw == ''){
-            alert("비밀번호를 입력해주세요")
+        if (memberPw === '') {
+            alert("비밀번호를 입력해주세요");
             return;
         }
-        
-        axios.post("/member/memberLogin" , memberList)
-        .then(response =>{
-            console.log(response.data)
-            alert(response.data.memberId + "님 반갑습니다.")
-            navigator("/")
+
+        axios.post("/login", {
+            'username': memberId,
+            'password': memberPw
+        })
+        .then(response => {
+            alert(memberId + "님 반갑습니다.");
+            navigate("/");
         })
         .catch(error => {
-            console.log(error)
+            console.log(error);
+            alert("로그인 실패");
+        });
+    };
+
+    const goLogout = () => {
+        axios.post("/logout")
+        .then(response => {
+            alert("로그아웃 되었습니다.");
+            navigate("/");
         })
-    }
-    const navigate = useNavigate();
+        .catch(error => {
+            console.log(error);
+        });
+    };
+
     return (
         <div className="profille">
             <div className='login-header'>
                 <h3>Login</h3>
             </div>
             <div className='login'>
-                <input type="text" name="memberId" onChange={check}  placeholder="  아이디"/>
-                <input type="password" name="memberPw" onChange={check}  placeholder="  비밀번호"/>
+                <input type="text" name="memberId" onChange={loginOnChange} placeholder="  아이디" />
+                <input type="password" name="memberPw" onChange={loginOnChange} placeholder="  비밀번호" />
                 <button type="button" onClick={goLogin}>로그인</button>
+                <button type="button" onClick={goLogout}>로그아웃</button>
             </div>
             <div className='profille-footer'>
                 <ul className="member-find">
@@ -54,6 +74,7 @@ const Profille = () => {
                 </ul>
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default Profille;

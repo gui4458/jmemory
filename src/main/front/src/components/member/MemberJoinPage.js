@@ -288,7 +288,7 @@ const MemberJoinPage = ({ navigate }) => {
                                         setIsIdValid(false);
                                     } else {
                                         if (/^[a-zA-Z0-9]{6,}$/.test(member.memberId)) {
-                                            axios.post("/idOverlappingChk", { memberId: member.memberId })
+                                            axios.post("/member/idOverlappingChk", { memberId: member.memberId })
                                                 .then((response) => {
                                                     if (response.data === 1) {
                                                         alert("해당 아이디는 이미 존재합니다.\n다시 입력해주세요.")
@@ -360,7 +360,7 @@ const MemberJoinPage = ({ navigate }) => {
                                             if (/^([ㄱ-ㅎㅏ-ㅣ])+$/.test(member.memberNickname)) {
                                                 return "사용 할 수 없는 닉네임 입니다.";
                                             }
-                                            axios.post("/nicknameOverlappingChk", { memberNickname: member.memberNickname })
+                                            axios.post("/member/nicknameOverlappingChk", { memberNickname: member.memberNickname })
                                                 .then((response) => {
                                                     if (response.data === 1) {
                                                         alert("해당 닉네임은 이미 존재합니다.\n다시 입력해주세요.")
@@ -495,7 +495,7 @@ const MemberJoinPage = ({ navigate }) => {
                         <div className="col">
                             <button className="btn btn-primary" onClick={() => {
                                 if (validateForm()) {
-                                    axios.post('/joinMember', member)
+                                    axios.post('/member/joinMember', member)
                                         .then(response => {
                                             alert(`${member.memberId}님 환영합니다.`)
                                             navigate("/")
