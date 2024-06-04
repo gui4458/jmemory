@@ -1,22 +1,13 @@
-import { useParams } from "react-router-dom";
-import MyPage from "./MyPage";
 import { useEffect, useState } from "react";
-import { forEach, set } from "lodash";
-import Home from "./Home";
-import ProfilleDetail from "./ProfilleDetail";
-import Diary from "./Diary";
-import Photo from "./Photo";
+import HomeSide from "./HomeSide";
+import DiarySide from "./DiarySide";
 
-const Detail = (props) =>{
-    console.log(props);
-    console.log(props.cateList.cateCode);
+const SideDetail = (props) =>{
     const [isShowHome , setIsShowHome] = useState(true);
     const [isShowProfille ,setIsShowProfille] = useState(false);
     const [isShowDiary , setIsShowDiary] = useState(false);
     const [isShowPhoto , setIsShowPhoto] = useState(false);
-    const [cateCode , setCateCode] = useState('');
 
-    
     useEffect(() => {
         console.log("!!!")
         if(props.cateList != ''){
@@ -25,7 +16,6 @@ const Detail = (props) =>{
                 setIsShowProfille(false)
                 setIsShowDiary(false)
                 setIsShowPhoto(false)
-                console.log("!!!!!!" + cateCode)
             }
             if(props.cateList.cateCode == 2){
                 setIsShowHome(false)
@@ -49,12 +39,10 @@ const Detail = (props) =>{
     })
     return(
         <>
-            { isShowHome ? <Home /> : ''}
-            { isShowProfille ? <ProfilleDetail/> : ''}
-            { isShowDiary ? <Diary/> : ''}
-            { isShowPhoto ? <Photo/> : ''}
+            {isShowHome ? <HomeSide /> : ''}
+            {isShowProfille ? <HomeSide /> : ''}
+            {isShowDiary ? <DiarySide /> : ''}
         </>
-       
     )
 }
-export default Detail;
+export default SideDetail;

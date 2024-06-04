@@ -1,0 +1,69 @@
+.profille-container{
+    width: 100%;
+    padding: 10px;
+}
+.profille-contents{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+}
+.profille-photo{
+    width: 30%;
+    height: 250px;
+    border: 1px solid #ccc;
+}
+.profille-content{
+    margin-left: 20px;
+    width: 70%;
+    height: 250px;
+    border-bottom: 1px solid #ccc;
+    overflow-y: scroll;
+}
+.profille-con{
+    margin-bottom: 15px;
+    padding: 5px;
+}
+.profille-con span {
+    margin-right: 40px;
+}
+.profille-con-nickName{
+    margin-bottom: 15px;
+    padding: 5px;
+}
+.profille-con-nickName span{
+    margin-right: 25px;
+}
+.profille-con-nickName input{
+    padding-left: 10px;
+    width: 50%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+.profille-con input {
+    padding-left: 10px;
+    width: 50%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #000;
+}
+.profille-con input[type=radio]{
+    width: 14px;
+    height: 14px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+.profille-con input[type=radio]:checked{
+    background-color: #22d3ee; 
+    border: 3px solid white; 
+    box-shadow: 0 0 0 1.6px #22d3ee; 
+}
+
+.profille-footer{
+    margin-top: 20px;
+}

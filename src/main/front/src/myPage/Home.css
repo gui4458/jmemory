@@ -1,0 +1,19 @@
+.homeContainer{
+    padding: 10px;
+    height: 100%;
+    overflow-y: scroll;
+}
+.title {
+    font-size: 15px;
+    color: rgb(111, 210, 210);
+    border-bottom: 1px dashed #ccc;
+}
+.boxs{
+    height: 200px;
+}
+.photo-container{
+    padding: 10px;
+}
+.cursor{
+    cursor: pointer;
+}
