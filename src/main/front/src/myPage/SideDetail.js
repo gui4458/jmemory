@@ -7,6 +7,7 @@ const SideDetail = (props) =>{
     const [isShowProfille ,setIsShowProfille] = useState(false);
     const [isShowDiary , setIsShowDiary] = useState(false);
     const [isShowPhoto , setIsShowPhoto] = useState(false);
+    const [diaryCode , setDiaryCode] = useState('');
 
     useEffect(() => {
         console.log("!!!")
@@ -24,6 +25,8 @@ const SideDetail = (props) =>{
                 setIsShowPhoto(false)
             }
             if(props.cateList.cateCode == 3){
+                console.log("@@@@" + props.cateList.cateCode)
+                setDiaryCode(props.cateList.cateCode)
                 setIsShowDiary(true)
                 setIsShowHome(false)
                 setIsShowProfille(false)
@@ -41,7 +44,8 @@ const SideDetail = (props) =>{
         <>
             {isShowHome ? <HomeSide /> : ''}
             {isShowProfille ? <HomeSide /> : ''}
-            {isShowDiary ? <DiarySide /> : ''}
+            {isShowDiary ? <DiarySide cateCode={props.cateList.cateCode} /> : ''}
+            {diaryCode}
         </>
     )
 }

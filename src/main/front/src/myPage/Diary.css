@@ -1,4 +1,6 @@
-
+.diary-container{
+    padding: 10px;
+}
 .diarySide-container{
     width: 100%;
     height: 92%;

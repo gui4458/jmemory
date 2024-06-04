@@ -1,4 +1,8 @@
-const DiarySide = () => {
+const DiarySide = (cateCode) => {
+
+    console.log("@@@@@" + cateCode.cateCode)
+    alert(cateCode.cateCode)
+
     return(
         <div className="diarySide-container">
             <div className="diarySide-title">
@@ -8,7 +12,9 @@ const DiarySide = () => {
                 
             </div>
             <div className="diarySide-footer">
-                <button type="button">폴더관리하기</button>
+                <button type="button" onClick={() => {
+
+                }}>폴더관리하기</button>
             </div>
         </div>
     )
