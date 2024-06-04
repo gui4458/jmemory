@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './MainPage.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Profille = () => {
@@ -8,9 +8,24 @@ const Profille = () => {
         memberId: '',
         memberPw: ''
     });
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [memberInfo, setMemberInfo] = useState(null);
 
     const { memberId, memberPw } = member;
     const navigate = useNavigate();
+
+    useEffect(() => {
+        axios.get("/member/status")
+            .then(response => {
+                if (response.data.isAuthenticated) {
+                    setIsAuthenticated(true);
+                    setMemberInfo(response.data.memberInfo);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
 
     const loginOnChange = (e) => {
         const { value, name } = e.target;
@@ -18,6 +33,7 @@ const Profille = () => {
             ...member,
             [name]: value
         });
+        console.log(member);
     };
 
     const goLogin = () => {
@@ -30,12 +46,14 @@ const Profille = () => {
             return;
         }
 
-        axios.post("/login", {
-            'username': memberId,
-            'password': memberPw
+        axios.post("/member/login", {
+            'memberId': memberId,
+            'memberPw': memberPw
         })
         .then(response => {
             alert(memberId + "님 반갑습니다.");
+            setIsAuthenticated(true);
+            setMemberInfo(response.data);
             navigate("/");
         })
         .catch(error => {
@@ -45,9 +63,15 @@ const Profille = () => {
     };
 
     const goLogout = () => {
-        axios.post("/logout")
+        axios.post("/member/logout")
         .then(response => {
             alert("로그아웃 되었습니다.");
+            setIsAuthenticated(false);
+            setMemberInfo(null);
+            setMember({
+                memberId: '',
+                memberPw: ''
+            });
             navigate("/");
         })
         .catch(error => {
@@ -58,20 +82,34 @@ const Profille = () => {
     return (
         <div className="profille">
             <div className='login-header'>
-                <h3>Login</h3>
+                <h3>{isAuthenticated ? "Profile" : "Login"}</h3>
             </div>
             <div className='login'>
-                <input type="text" name="memberId" onChange={loginOnChange} placeholder="  아이디" />
-                <input type="password" name="memberPw" onChange={loginOnChange} placeholder="  비밀번호" />
-                <button type="button" onClick={goLogin}>로그인</button>
-                <button type="button" onClick={goLogout}>로그아웃</button>
+                {!isAuthenticated ? (
+                    <>
+                        <input type="text" name="memberId" onChange={loginOnChange} placeholder="  아이디" />
+                        <input type="password" name="memberPw" onChange={loginOnChange} placeholder="  비밀번호" />
+                        <button type="button" onClick={goLogin}>로그인</button>
+                    </>
+                ) : (
+                    <>
+                        <div>
+                            <p>회원 아이디: {memberInfo.memberId}</p>
+                            <p>회원 이름: {memberInfo.memberName}</p>
+                            <p>회원 닉네임: {memberInfo.memberNickname}</p>
+                        </div>
+                        <button type="button" onClick={goLogout}>로그아웃</button>
+                    </>
+                )}
             </div>
             <div className='profille-footer'>
-                <ul className="member-find">
-                    <li><a>아이디 찾기</a> ／</li>
-                    <li><a>비밀번호 찾기 </a> ／</li>
-                    <li><a onClick={() => navigate("/goJoin")}>회원가입</a></li>
-                </ul>
+                {!isAuthenticated && (
+                    <ul className="member-find">
+                        <li><a>아이디 찾기</a> ／</li>
+                        <li><a>비밀번호 찾기 </a> ／</li>
+                        <li><a onClick={() => navigate("/goJoin")}>회원가입</a></li>
+                    </ul>
+                )}
             </div>
         </div>
     );
