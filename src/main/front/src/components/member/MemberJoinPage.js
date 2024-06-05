@@ -217,7 +217,7 @@ const MemberJoinPage = ({ navigate }) => {
         if (kakaoMapLoaded) {
             new window.daum.Postcode({
                 oncomplete: function (data) {
-                    const fullAddress = data.address;
+                    let fullAddress = data.address;
                     let extraAddress = "";
 
                     if (data.addressType === "R") {
