@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 해당 파일에 모든 쿼리문을 작성 -->
+<mapper namespace="albumMapper">
+	<resultMap id="album" type="com.green.jmemory.album.VO.AlbumVO">
+        <id column="ALBUM_CODE"          property="albumCode"/>
+        <result column="CATE_CODE"      property="cateCode"/>
+        <result column="ALBUM_NAME"    property="albumName"/>
+    </resultMap>
+
+    <select id="albumSelect" resultMap="album">
+        SELECT * FROM
+        SIDE_ALBUM
+        WHERE CATE_CODE = #{cateCode}
+    </select>
+
+    <delete id="deleteAlbum">
+        DELETE FROM SIDE_ALBUM
+        WHERE ALBUM_CODE = #{albumCode}
+    </delete>
+
+    <update id="updateAlbumName">
+        UPDATE SIDE_ALBUM
+        SET
+        ALBUM_NAME = #{ALBUM_NAME}
+        WHERE ALBUM_CODE = #{albumCode}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

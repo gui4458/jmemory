@@ -45,7 +45,6 @@ const SideDetail = (props) =>{
             {isShowHome ? <HomeSide /> : ''}
             {isShowProfille ? <HomeSide /> : ''}
             {isShowDiary ? <DiarySide cateCode={props.cateList.cateCode} /> : ''}
-            {diaryCode}
         </>
     )
 }

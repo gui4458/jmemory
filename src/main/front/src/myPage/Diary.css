@@ -17,6 +17,20 @@
 .diarySide-content{
     height: 80%;
     background-color: #fff;
+    padding: 5px;
+}
+.diarySide-content ul {
+    padding: 0;
+}
+.diarySide-content li {
+    padding: 2px;
+}
+.diarySide-content a {
+    cursor: pointer;
+    text-decoration: none;
+}
+.folder-icon{
+    margin-right: 10px;
 }
 .diarySide-footer{
     display: flex;
