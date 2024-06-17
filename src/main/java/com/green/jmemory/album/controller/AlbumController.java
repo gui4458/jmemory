@@ -14,7 +14,7 @@ public class AlbumController {
 
     @GetMapping("/selectAlbum/{cateCode}")
     public List<AlbumVO> selectAlbum(@PathVariable (name = "cateCode") int cateCode){
-        System.out.println(cateCode);
+        System.out.println("@@@@@@@@@" + cateCode);
         return albumService.albumSelect(cateCode);
     }
 
@@ -23,9 +23,9 @@ public class AlbumController {
         System.out.println(albumCode);
     }
 
-    @PostMapping("/updateAlbumName/{albumCode}")
-    public void updateAlbumName(@PathVariable(name = "albumCode") int albumCode){
-        System.out.println(albumCode);
+    @PostMapping("/updateAlbumName")
+    public void updateAlbumName(@RequestBody AlbumVO albumVO){
+        System.out.println("@@@@" + albumVO);
     }
 
 }
